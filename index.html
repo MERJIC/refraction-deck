@@ -466,7 +466,7 @@
       display:block !important;
       width:100% !important;
       height:auto !important;
-      min-height:100svh;
+      min-height:0 !important;
       flex:none !important;
       overflow:visible !important;
       padding:8vw 6vw 12vw !important;
@@ -509,15 +509,14 @@
       margin-bottom:4vw;
     }
 
-    /* pipeline 两列 */
+    /* pipeline 单列堆叠 */
     .pipeline,
     .pipeline[data-cols="3"],
     .pipeline[data-cols="4"],
     .pipeline[data-cols="6"]{
-      display:grid !important;
-      grid-template-columns:1fr 1fr !important;
-      gap:3vw !important;
+      display:block !important;
     }
+    .pipeline .step{margin-bottom:4vw !important}
 
     /* ---- 5. rowline 纵向堆叠 ---- */
     .rowline{display:block !important; padding:3.5vw 0 !important; border-top:1px solid rgba(127,127,127,.25)}
