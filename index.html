@@ -542,11 +542,22 @@
     /* 6. 图片 */
     .frame-img.r-16x9,.frame-img.r-4x3{max-height:45vw}
 
-    /* 7. hero 等固定最小高度设为 auto */
-    .frame[style]{min-height:auto !important}
+    /* 7. frame 容器取消 overflow 裁剪，让内容自然撑高 */
+    .frame{overflow:visible !important; min-height:0 !important; flex:none !important; height:auto !important}
+    .slide > .frame{flex:none !important}
 
-    /* 8. 内联 max-width 全部释放 */
+    /* 8. 所有内联 min-height / height 用 vh 的都释放 */
+    [style*="min-height"]{min-height:0 !important}
+    [style*="height:"]{height:auto !important}
+
+    /* 9. 内联 max-width 全部释放 */
     [style*="max-width"]{max-width:100% !important}
+
+    /* 10. fill 不再 flex:1 撑开，让父容器自适应高度 */
+    .fill{flex:none !important; min-height:4vw}
+
+    /* 11. rule 间距收紧 */
+    .rule{margin:3vw 0 !important}
   }
 </style>
 </head>
