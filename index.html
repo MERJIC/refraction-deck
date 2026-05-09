@@ -436,7 +436,7 @@
   .callout{border-left-color:var(--accent) !important}
   #nav .dot.active{background:var(--accent) !important;width:22px;border-radius:999px}
   body.light-bg #nav .dot.active{background:var(--accent) !important}
-  /* ---------- 响应式降级 ---------- */
+  /* ---------- 平板降级 ---------- */
   @media (max-width:900px){
     .display{font-size:16vw}
     .display-zh{font-size:12vw}
@@ -445,6 +445,82 @@
     .h-xl{font-size:9vw}
     .pipeline{grid-template-columns:repeat(2,1fr)}
     .grid-2-7-5,.grid-2-6-6,.grid-2-8-4{grid-template-columns:1fr}
+  }
+
+  /* ============ 移动端适配 (@media ≤ 767px) ============ */
+  @media (max-width:767px){
+    /* 允许单页内纵向滚动，横向滑动翻页保持不变 */
+    .slide{overflow-y:auto !important; padding:4vw 5vw 18vw 5vw !important}
+
+    /* 字体 */
+    .h-hero{font-size:14vw !important}
+    .slide.hero .h-hero{font-size:15vw !important}
+    .h-xl{font-size:9.5vw !important; white-space:normal !important}
+    .h-sub{font-size:6vw !important; white-space:normal !important}
+    .h-md{font-size:5.5vw !important}
+    .h3-zh{font-size:4.8vw !important}
+    .h1-zh{font-size:9vw}
+    .h2-zh{font-size:7vw}
+    .display{font-size:20vw}
+    .display-zh{font-size:15vw}
+    .lead{font-size:max(14px,4.2vw) !important; max-width:100% !important}
+    .body-zh{font-size:max(13px,4vw)}
+    .body-serif{font-size:max(13px,4vw)}
+    .callout{font-size:max(13px,4vw); padding:2.5vw 4vw}
+    .callout .q-big{font-size:max(15px,4.8vw) !important}
+    .kicker{font-size:3vw; letter-spacing:.18em}
+    .meta{font-size:max(10px,2.8vw)}
+    .meta-row{font-size:max(10px,2.8vw)}
+    .chrome{font-size:max(10px,2.6vw); letter-spacing:.1em}
+    .foot{font-size:max(10px,2.6vw); letter-spacing:.1em}
+    .sign{font-size:5vw}
+    .ghost{font-size:72vw}
+    .big-num,.stat .n{font-size:20vw}
+    .mid-num{font-size:13vw}
+    .stat-card .stat-nb,.grid-4 .stat-card .stat-nb,.grid-3 .stat-card .stat-nb{font-size:11vw !important}
+    .step-nb{font-size:3.2vw !important}
+    .step-title{font-size:4.8vw !important}
+    .step-desc{font-size:max(11px,3.8vw) !important}
+    .rowline .k{font-size:4.8vw !important; white-space:normal !important}
+    .rowline .v{font-size:max(12px,4vw) !important}
+    .rowline .m{font-size:max(10px,2.8vw) !important}
+    .pillar .t{font-size:6vw !important}
+    .pillar .ic{font-size:5.5vw !important}
+    .pillar .ic svg{width:6.5vw !important; height:6.5vw !important}
+    .plat .name{font-size:5vw !important}
+    .plat .nb{font-size:8vw !important}
+    .plat .fill{font-size:6vw !important}
+    .ico-lg{width:6vw !important; height:6vw !important}
+    .ico-md{width:5vw !important; height:5vw !important}
+    .ico-sm{width:4vw !important; height:4vw !important}
+
+    /* 布局折叠 */
+    .grid-2-6-6,.grid-2-7-5,.grid-2-8-4,.split,.split-55{grid-template-columns:1fr !important}
+    .grid-3-3,.grid-3{grid-template-columns:1fr 1fr !important; gap:3vw !important}
+    .grid-4,.grid-6{grid-template-columns:1fr 1fr !important; gap:3vw 4vw !important}
+    .pipeline,.pipeline[data-cols="3"],.pipeline[data-cols="4"],.pipeline[data-cols="6"]{grid-template-columns:1fr 1fr !important}
+    /* 无 class 的内联 grid（slide 5 / 6）通过 .m-stack 覆盖 */
+    .m-stack{grid-template-columns:1fr !important}
+
+    /* rowline 纵向堆叠 */
+    .rowline{grid-template-columns:1fr !important; row-gap:0.6vh !important; padding:2.4vh 0 !important}
+    .rowline .m{justify-self:start !important; margin-top:0.5vh}
+
+    /* 位置工具 */
+    .bottom-left{left:5vw; bottom:12vh; max-width:88vw}
+    .bottom-right{right:5vw; bottom:12vh; max-width:88vw}
+
+    /* 导航圆点加大 */
+    #nav{gap:12px; padding:10px 18px}
+    #nav .dot{width:10px; height:10px}
+    #nav .dot.active{width:26px}
+
+    /* 图片高度上限 */
+    .frame-img.r-16x9{max-height:28vh}
+    .frame-img.r-4x3{max-height:30vh}
+
+    /* hero frame 去掉固定最小高度 */
+    .slide.hero .frame[style*="min-height"]{min-height:auto !important}
   }
 </style>
 </head>
@@ -583,7 +659,7 @@
       乘积关系。任何一项趋近于零,整体坍塌。<br>传播力不在等式里 —— 它是结果,不是输入项。
     </p>
 
-    <div style="display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:2vw; align-items:stretch; margin-top:4vh">
+    <div class="m-stack" style="display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:2vw; align-items:stretch; margin-top:4vh">
       <div class="stat-card" data-anim style="border-color:currentColor">
         <div class="stat-label">Aesthetic · 审美骨架</div>
         <div class="stat-nb" style="font-family:var(--serif-zh); font-size:3.4vw; line-height:1.1; letter-spacing:-.01em">视觉语言</div>
@@ -619,7 +695,7 @@
     <div class="kicker" data-anim>How It Runs</div>
     <h2 class="h-xl" style="white-space:nowrap; font-size:5.4vw" data-anim>只消耗判断力，不消耗产能。</h2>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 4vw; margin-top:6vh; align-items:start">
+    <div class="m-stack" style="display:grid; grid-template-columns:1fr 1fr; gap:0 4vw; margin-top:6vh; align-items:start">
 
       <!-- 左列 kicker -->
       <div class="kicker" data-anim style="white-space:nowrap">出品人 · MERJIC</div>
