@@ -449,115 +449,150 @@
 
   /* ============ 移动端适配 · 竖向滚动模式 (@media ≤ 767px) ============ */
   @media (max-width:767px){
-    /* 1. 取消横向 deck，改为纵向滚动 */
-    html,body{overflow-y:auto !important; overflow-x:hidden !important; height:auto !important}
+    /* ---- 1. 滚动容器 ---- */
+    html,body{overflow-y:auto !important; overflow-x:hidden !important; height:auto !important; width:100% !important}
     #deck{
       position:relative !important;
       inset:auto !important;
       width:100% !important;
       height:auto !important;
-      flex-direction:column !important;
+      display:block !important;
       transform:none !important;
       transition:none !important;
     }
+
+    /* ---- 2. 每张 slide：block 布局，内容自然撑高 ---- */
     .slide{
+      display:block !important;
       width:100% !important;
       height:auto !important;
       min-height:100svh;
       flex:none !important;
       overflow:visible !important;
-      padding:10vw 6vw 14vw 6vw !important;
+      padding:8vw 6vw 12vw !important;
+      box-sizing:border-box !important;
     }
-    /* slide 间分隔线 */
     .slide+.slide{border-top:1px solid rgba(127,127,127,.18)}
-    /* 隐藏桌面端操控 UI */
+
+    /* ---- 3. chrome / frame / foot 全部 block ---- */
+    .frame{
+      display:block !important;
+      width:100% !important;
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+      overflow:visible !important;
+      margin-top:5vw;
+      margin-bottom:5vw;
+    }
+    .foot{
+      display:flex !important;
+      justify-content:space-between !important;
+      align-items:flex-end !important;
+      margin-top:6vw;
+    }
+
+    /* ---- 4. 所有多列网格/flex → 单列 block ---- */
+    .grid-2-6-6,.grid-2-7-5,.grid-2-8-4,
+    .split,.split-55,
+    .grid-3,.grid-4,.grid-6,
+    .grid-3-3,.m-stack{
+      display:block !important;
+      width:100% !important;
+    }
+    .grid-2-6-6 > *,.grid-2-7-5 > *,.grid-2-8-4 > *,
+    .split > *,.split-55 > *,
+    .grid-3 > *,.grid-4 > *,.grid-6 > *,
+    .grid-3-3 > *,.m-stack > *{
+      display:block !important;
+      width:100% !important;
+      margin-bottom:4vw;
+    }
+
+    /* pipeline 两列 */
+    .pipeline,
+    .pipeline[data-cols="3"],
+    .pipeline[data-cols="4"],
+    .pipeline[data-cols="6"]{
+      display:grid !important;
+      grid-template-columns:1fr 1fr !important;
+      gap:3vw !important;
+    }
+
+    /* ---- 5. rowline 纵向堆叠 ---- */
+    .rowline{display:block !important; padding:3.5vw 0 !important; border-top:1px solid rgba(127,127,127,.25)}
+    .rowline:last-child{border-bottom:1px solid rgba(127,127,127,.25)}
+    .rowline .k{display:block; font-size:4.5vw !important; white-space:normal !important; margin-bottom:1.5vw; font-weight:700}
+    .rowline .v{display:block; font-size:3.8vw !important; line-height:1.6; margin-bottom:1.5vw}
+    .rowline .m{display:block; font-size:3vw !important; opacity:.5}
+
+    /* ---- 6. 位置元素 → 正常流 ---- */
+    .bottom-left,.bottom-right,.top-right{position:static !important; max-width:100% !important; text-align:left !important; margin-top:4vw; margin-bottom:4vw}
+    .ghost{display:none !important}
+
+    /* ---- 7. 释放所有内联高度约束 ---- */
+    [style*="min-height"]{min-height:0 !important}
+    [style*="max-height"]{max-height:none !important}
+    [style*="max-width"]{max-width:100% !important}
+    [style*="white-space:nowrap"]{white-space:normal !important}
+    [style*="height:100"],[style*="height: 100"]{height:auto !important}
+
+    /* ---- 8. 隐藏桌面 UI ---- */
     #nav{display:none !important}
     #hint{display:none !important}
     #overview{display:none !important}
 
-    /* 2. 字体放大至移动端可读 */
-    .h-hero{font-size:14vw !important}
-    .slide.hero .h-hero{font-size:16vw !important}
-    .h-xl{font-size:10vw !important; white-space:normal !important}
-    .h-sub{font-size:6vw !important; white-space:normal !important}
-    .h-md{font-size:5.5vw !important}
-    .h3-zh{font-size:5vw !important}
-    .h1-zh{font-size:9vw}
-    .h2-zh{font-size:7.5vw}
-    .display{font-size:20vw}
-    .display-zh{font-size:15vw}
-    .lead{font-size:4.5vw !important; max-width:100% !important; line-height:1.65 !important}
-    .body-zh{font-size:4vw; line-height:1.7}
-    .body-serif{font-size:4vw; line-height:1.7}
-    .callout{font-size:4vw; padding:3vw 4.5vw}
-    .callout .q-big{font-size:5vw !important}
-    .kicker{font-size:3vw; letter-spacing:.18em}
-    .meta{font-size:3vw}
-    .meta-row{font-size:3vw; gap:.6em}
-    .chrome{font-size:2.8vw; letter-spacing:.1em}
-    .foot{font-size:2.8vw; letter-spacing:.1em}
-    .sign{font-size:5vw}
-    .ghost{font-size:72vw}
-    .big-num,.stat .n{font-size:20vw}
-    .mid-num{font-size:14vw}
+    /* ---- 9. 字体 ---- */
+    .h-hero{font-size:13vw !important; line-height:1.1 !important}
+    .slide.hero .h-hero{font-size:15vw !important}
+    .h-xl{font-size:9vw !important; white-space:normal !important; line-height:1.15 !important}
+    .h-sub{font-size:5.5vw !important; white-space:normal !important}
+    .h-md{font-size:5vw !important}
+    .h3-zh{font-size:4.8vw !important}
+    .h1-zh{font-size:8vw !important}
+    .h2-zh{font-size:7vw !important}
+    .display{font-size:18vw !important}
+    .display-zh{font-size:14vw !important}
+    .lead{font-size:4.2vw !important; max-width:100% !important; line-height:1.7 !important; word-break:keep-all}
+    .body-zh{font-size:3.8vw !important; line-height:1.75 !important}
+    .body-serif{font-size:3.8vw !important; line-height:1.75 !important}
+    .callout{font-size:3.8vw !important; padding:3.5vw 4vw !important; line-height:1.7 !important}
+    .callout .q-big{font-size:4.8vw !important}
+    .kicker{font-size:3vw !important; letter-spacing:.16em !important; margin-bottom:2vw !important}
+    .meta{font-size:2.8vw !important}
+    .meta-row{font-size:2.8vw !important; gap:.5em !important; flex-wrap:wrap !important}
+    .chrome{font-size:2.6vw !important; letter-spacing:.08em !important}
+    .foot{font-size:2.6vw !important; letter-spacing:.08em !important}
+    .sign{font-size:5vw !important}
+    .big-num,.stat .n{font-size:18vw !important}
+    .mid-num{font-size:13vw !important}
     .stat-card .stat-nb,
     .grid-4 .stat-card .stat-nb,
-    .grid-3 .stat-card .stat-nb{font-size:12vw !important}
-    .step-nb{font-size:3.5vw !important}
-    .step-title{font-size:5vw !important}
-    .step-desc{font-size:3.8vw !important}
-    .rowline .k{font-size:5vw !important; white-space:normal !important}
-    .rowline .v{font-size:4vw !important}
-    .rowline .m{font-size:3vw !important}
-    .pillar .t{font-size:6.5vw !important}
-    .pillar .d{font-size:4vw !important}
+    .grid-3 .stat-card .stat-nb{font-size:11vw !important}
+    .step-nb{font-size:3.2vw !important}
+    .step-title{font-size:4.8vw !important}
+    .step-desc{font-size:3.6vw !important; line-height:1.5 !important}
+    .pillar .t{font-size:6vw !important}
+    .pillar .d{font-size:3.8vw !important}
     .pillar .ic svg{width:7vw !important; height:7vw !important}
-    .plat .name{font-size:5.5vw !important}
-    .plat .nb{font-size:8.5vw !important}
-    .plat .fill{font-size:6.5vw !important}
+    .plat .name{font-size:5vw !important}
+    .plat .nb{font-size:8vw !important}
+    .plat .fill{font-size:6vw !important}
     .ico-lg{width:7vw !important; height:7vw !important}
-    .ico-md{width:5.5vw !important; height:5.5vw !important}
+    .ico-md{width:5vw !important; height:5vw !important}
 
-    /* 3. 布局：所有多列折叠为单列 */
-    .grid-2-6-6,.grid-2-7-5,.grid-2-8-4,
-    .split,.split-55{grid-template-columns:1fr !important; gap:5vw !important}
-    .grid-3-3{grid-template-columns:1fr 1fr !important; gap:3vw !important}
-    .grid-3{grid-template-columns:1fr !important; gap:4vw !important}
-    .grid-4,.grid-6{grid-template-columns:1fr 1fr !important; gap:3vw 4vw !important}
-    .pipeline,
-    .pipeline[data-cols="3"],
-    .pipeline[data-cols="4"],
-    .pipeline[data-cols="6"]{grid-template-columns:1fr 1fr !important; gap:3vw !important}
-    .m-stack{grid-template-columns:1fr !important; gap:4vw !important}
-
-    /* 4. rowline 纵向堆叠 */
-    .rowline{grid-template-columns:1fr !important; row-gap:1vw !important; padding:3.5vw 0 !important}
-    .rowline .m{justify-self:start !important; margin-top:1.5vw; opacity:.5}
-
-    /* 5. 位置工具适配 */
-    .bottom-left{position:static; max-width:100%; margin-top:4vw}
-    .bottom-right{position:static; max-width:100%; text-align:left; margin-top:4vw}
-    .top-right{position:static; text-align:left; margin-bottom:4vw}
-
-    /* 6. 图片 */
-    .frame-img.r-16x9,.frame-img.r-4x3{max-height:45vw}
-
-    /* 7. frame 容器取消 overflow 裁剪，让内容自然撑高 */
-    .frame{overflow:visible !important; min-height:0 !important; flex:none !important; height:auto !important}
-    .slide > .frame{flex:none !important}
-
-    /* 8. 所有内联 min-height / height 用 vh 的都释放 */
-    [style*="min-height"]{min-height:0 !important}
-    [style*="height:"]{height:auto !important}
-
-    /* 9. 内联 max-width 全部释放 */
-    [style*="max-width"]{max-width:100% !important}
-
-    /* 10. fill 不再 flex:1 撑开，让父容器自适应高度 */
-    .fill{flex:none !important; min-height:4vw}
-
-    /* 11. rule 间距收紧 */
+    /* ---- 10. 间距 ---- */
+    .fill{display:none !important}
     .rule{margin:3vw 0 !important}
+    .col{display:block !important}
+    .col > *{margin-bottom:3vw}
+    .pillar{margin-bottom:5vw}
+    .stat-card{margin-bottom:5vw}
+    .pipeline-section{margin-top:5vw}
+    .step{padding-top:3vw; margin-bottom:2vw}
+
+    /* ---- 11. 图片 ---- */
+    .frame-img{max-height:50vw !important}
   }
 </style>
 </head>
