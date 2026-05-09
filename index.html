@@ -447,80 +447,106 @@
     .grid-2-7-5,.grid-2-6-6,.grid-2-8-4{grid-template-columns:1fr}
   }
 
-  /* ============ 移动端适配 (@media ≤ 767px) ============ */
+  /* ============ 移动端适配 · 竖向滚动模式 (@media ≤ 767px) ============ */
   @media (max-width:767px){
-    /* 允许单页内纵向滚动，横向滑动翻页保持不变 */
-    .slide{overflow-y:auto !important; padding:4vw 5vw 18vw 5vw !important}
+    /* 1. 取消横向 deck，改为纵向滚动 */
+    html,body{overflow-y:auto !important; overflow-x:hidden !important; height:auto !important}
+    #deck{
+      position:relative !important;
+      inset:auto !important;
+      width:100% !important;
+      height:auto !important;
+      flex-direction:column !important;
+      transform:none !important;
+      transition:none !important;
+    }
+    .slide{
+      width:100% !important;
+      height:auto !important;
+      min-height:100svh;
+      flex:none !important;
+      overflow:visible !important;
+      padding:10vw 6vw 14vw 6vw !important;
+    }
+    /* slide 间分隔线 */
+    .slide+.slide{border-top:1px solid rgba(127,127,127,.18)}
+    /* 隐藏桌面端操控 UI */
+    #nav{display:none !important}
+    #hint{display:none !important}
+    #overview{display:none !important}
 
-    /* 字体 */
+    /* 2. 字体放大至移动端可读 */
     .h-hero{font-size:14vw !important}
-    .slide.hero .h-hero{font-size:15vw !important}
-    .h-xl{font-size:9.5vw !important; white-space:normal !important}
+    .slide.hero .h-hero{font-size:16vw !important}
+    .h-xl{font-size:10vw !important; white-space:normal !important}
     .h-sub{font-size:6vw !important; white-space:normal !important}
     .h-md{font-size:5.5vw !important}
-    .h3-zh{font-size:4.8vw !important}
+    .h3-zh{font-size:5vw !important}
     .h1-zh{font-size:9vw}
-    .h2-zh{font-size:7vw}
+    .h2-zh{font-size:7.5vw}
     .display{font-size:20vw}
     .display-zh{font-size:15vw}
-    .lead{font-size:max(14px,4.2vw) !important; max-width:100% !important}
-    .body-zh{font-size:max(13px,4vw)}
-    .body-serif{font-size:max(13px,4vw)}
-    .callout{font-size:max(13px,4vw); padding:2.5vw 4vw}
-    .callout .q-big{font-size:max(15px,4.8vw) !important}
+    .lead{font-size:4.5vw !important; max-width:100% !important; line-height:1.65 !important}
+    .body-zh{font-size:4vw; line-height:1.7}
+    .body-serif{font-size:4vw; line-height:1.7}
+    .callout{font-size:4vw; padding:3vw 4.5vw}
+    .callout .q-big{font-size:5vw !important}
     .kicker{font-size:3vw; letter-spacing:.18em}
-    .meta{font-size:max(10px,2.8vw)}
-    .meta-row{font-size:max(10px,2.8vw)}
-    .chrome{font-size:max(10px,2.6vw); letter-spacing:.1em}
-    .foot{font-size:max(10px,2.6vw); letter-spacing:.1em}
+    .meta{font-size:3vw}
+    .meta-row{font-size:3vw; gap:.6em}
+    .chrome{font-size:2.8vw; letter-spacing:.1em}
+    .foot{font-size:2.8vw; letter-spacing:.1em}
     .sign{font-size:5vw}
     .ghost{font-size:72vw}
     .big-num,.stat .n{font-size:20vw}
-    .mid-num{font-size:13vw}
-    .stat-card .stat-nb,.grid-4 .stat-card .stat-nb,.grid-3 .stat-card .stat-nb{font-size:11vw !important}
-    .step-nb{font-size:3.2vw !important}
-    .step-title{font-size:4.8vw !important}
-    .step-desc{font-size:max(11px,3.8vw) !important}
-    .rowline .k{font-size:4.8vw !important; white-space:normal !important}
-    .rowline .v{font-size:max(12px,4vw) !important}
-    .rowline .m{font-size:max(10px,2.8vw) !important}
-    .pillar .t{font-size:6vw !important}
-    .pillar .ic{font-size:5.5vw !important}
-    .pillar .ic svg{width:6.5vw !important; height:6.5vw !important}
-    .plat .name{font-size:5vw !important}
-    .plat .nb{font-size:8vw !important}
-    .plat .fill{font-size:6vw !important}
-    .ico-lg{width:6vw !important; height:6vw !important}
-    .ico-md{width:5vw !important; height:5vw !important}
-    .ico-sm{width:4vw !important; height:4vw !important}
+    .mid-num{font-size:14vw}
+    .stat-card .stat-nb,
+    .grid-4 .stat-card .stat-nb,
+    .grid-3 .stat-card .stat-nb{font-size:12vw !important}
+    .step-nb{font-size:3.5vw !important}
+    .step-title{font-size:5vw !important}
+    .step-desc{font-size:3.8vw !important}
+    .rowline .k{font-size:5vw !important; white-space:normal !important}
+    .rowline .v{font-size:4vw !important}
+    .rowline .m{font-size:3vw !important}
+    .pillar .t{font-size:6.5vw !important}
+    .pillar .d{font-size:4vw !important}
+    .pillar .ic svg{width:7vw !important; height:7vw !important}
+    .plat .name{font-size:5.5vw !important}
+    .plat .nb{font-size:8.5vw !important}
+    .plat .fill{font-size:6.5vw !important}
+    .ico-lg{width:7vw !important; height:7vw !important}
+    .ico-md{width:5.5vw !important; height:5.5vw !important}
 
-    /* 布局折叠 */
-    .grid-2-6-6,.grid-2-7-5,.grid-2-8-4,.split,.split-55{grid-template-columns:1fr !important}
-    .grid-3-3,.grid-3{grid-template-columns:1fr 1fr !important; gap:3vw !important}
+    /* 3. 布局：所有多列折叠为单列 */
+    .grid-2-6-6,.grid-2-7-5,.grid-2-8-4,
+    .split,.split-55{grid-template-columns:1fr !important; gap:5vw !important}
+    .grid-3-3{grid-template-columns:1fr 1fr !important; gap:3vw !important}
+    .grid-3{grid-template-columns:1fr !important; gap:4vw !important}
     .grid-4,.grid-6{grid-template-columns:1fr 1fr !important; gap:3vw 4vw !important}
-    .pipeline,.pipeline[data-cols="3"],.pipeline[data-cols="4"],.pipeline[data-cols="6"]{grid-template-columns:1fr 1fr !important}
-    /* 无 class 的内联 grid（slide 5 / 6）通过 .m-stack 覆盖 */
-    .m-stack{grid-template-columns:1fr !important}
+    .pipeline,
+    .pipeline[data-cols="3"],
+    .pipeline[data-cols="4"],
+    .pipeline[data-cols="6"]{grid-template-columns:1fr 1fr !important; gap:3vw !important}
+    .m-stack{grid-template-columns:1fr !important; gap:4vw !important}
 
-    /* rowline 纵向堆叠 */
-    .rowline{grid-template-columns:1fr !important; row-gap:0.6vh !important; padding:2.4vh 0 !important}
-    .rowline .m{justify-self:start !important; margin-top:0.5vh}
+    /* 4. rowline 纵向堆叠 */
+    .rowline{grid-template-columns:1fr !important; row-gap:1vw !important; padding:3.5vw 0 !important}
+    .rowline .m{justify-self:start !important; margin-top:1.5vw; opacity:.5}
 
-    /* 位置工具 */
-    .bottom-left{left:5vw; bottom:12vh; max-width:88vw}
-    .bottom-right{right:5vw; bottom:12vh; max-width:88vw}
+    /* 5. 位置工具适配 */
+    .bottom-left{position:static; max-width:100%; margin-top:4vw}
+    .bottom-right{position:static; max-width:100%; text-align:left; margin-top:4vw}
+    .top-right{position:static; text-align:left; margin-bottom:4vw}
 
-    /* 导航圆点加大 */
-    #nav{gap:12px; padding:10px 18px}
-    #nav .dot{width:10px; height:10px}
-    #nav .dot.active{width:26px}
+    /* 6. 图片 */
+    .frame-img.r-16x9,.frame-img.r-4x3{max-height:45vw}
 
-    /* 图片高度上限 */
-    .frame-img.r-16x9{max-height:28vh}
-    .frame-img.r-4x3{max-height:30vh}
+    /* 7. hero 等固定最小高度设为 auto */
+    .frame[style]{min-height:auto !important}
 
-    /* hero frame 去掉固定最小高度 */
-    .slide.hero .frame[style*="min-height"]{min-height:auto !important}
+    /* 8. 内联 max-width 全部释放 */
+    [style*="max-width"]{max-width:100% !important}
   }
 </style>
 </head>
@@ -1073,6 +1099,7 @@ slides.forEach((s,i)=>{
 });
 
 function go(n){
+  if(window.innerWidth<=767)return;
   if(lock)return;
   idx=Math.max(0,Math.min(total-1,n));
   deck.style.transform=`translateX(${-idx*100}vw)`;
@@ -1162,6 +1189,17 @@ addEventListener('touchend',e=>{
 },{passive:true});
 
 go(0);
+
+// 移动端竖向滚动模式初始化
+(function initMobile(){
+  if(window.innerWidth>767)return;
+  // 覆盖 JS 强写的内联宽度和 transform
+  deck.style.cssText='position:relative;width:100%;height:auto;transform:none;transition:none;flex-direction:column';
+  // 所有 data-anim 元素直接显示（跳过动效）
+  document.querySelectorAll('[data-anim],[data-anim="line"],[data-anim="left"],[data-anim="right"]')
+    .forEach(el=>{el.style.opacity='1';el.style.transform='none'});
+  document.body.classList.remove('motion-ready');
+})();
 </script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>lucide.createIcons();</script>
